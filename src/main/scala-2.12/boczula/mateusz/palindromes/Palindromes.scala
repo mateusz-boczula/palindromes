@@ -13,19 +13,14 @@ object Palindromes {
   }
 
   def getPalindromes(input: String) : Seq[Palindrome] = {
-    val indexes = input.zip(input.substring(2))
-      .zipWithIndex
-      .filter(p => p._1._1 == p._1._2)
-      .map(_._2 + 1)
-      .map(i => {
-        val prefix = input.substring(0, i)
-        val postfix = input.substring(i + 1)
-        val palindrome = getPalindrome(Option(input.charAt(i).toString), prefix, postfix)
-        val halfLength = (palindrome.length-1) / 2
-        Palindrome(i-halfLength, palindrome)
-      })
+    val oddLengthPalindromes = getOddLengthPalindromes(input)
+    val evenLengthPalindromes = getEvenLengthPalindromes(input)
 
-    val indexes2 = input.zip(input.substring(1))
+    (evenLengthPalindromes ++ oddLengthPalindromes).sortBy(_.length * -1).take(3)
+  }
+
+  private def getEvenLengthPalindromes(input: String) = {
+    input.zip(input.substring(1))
       .zipWithIndex
       .filter(p => p._1._1 == p._1._2)
       .map(_._2 + 1)
@@ -36,8 +31,20 @@ object Palindromes {
         val halfLength = palindrome.length / 2
         Palindrome(i - halfLength, palindrome)
       })
+  }
 
-    (indexes2 ++ indexes).sortBy(_.length * -1).take(3)
+  private def getOddLengthPalindromes(input: String) = {
+    input.zip(input.substring(2))
+      .zipWithIndex
+      .filter(p => p._1._1 == p._1._2)
+      .map(_._2 + 1)
+      .map(i => {
+        val prefix = input.substring(0, i)
+        val postfix = input.substring(i + 1)
+        val palindrome = getPalindrome(Option(input.charAt(i).toString), prefix, postfix)
+        val halfLength = (palindrome.length - 1) / 2
+        Palindrome(i - halfLength, palindrome)
+      })
   }
 
   def getPalindrome(cut: Option[String], prefix: String, postfix: String): String = {
