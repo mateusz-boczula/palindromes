@@ -3,9 +3,6 @@ package boczula.mateusz.palindromes
 import boczula.mateusz.palindromes.Palindromes.Palindrome
 import org.scalatest.{FlatSpec, Matchers}
 
-/**
-  * Created by jabaar on 30.05.17.
-  */
 class PalindromesTest extends FlatSpec with Matchers {
 
   it should "find a palindrome when inputs complient" in {
