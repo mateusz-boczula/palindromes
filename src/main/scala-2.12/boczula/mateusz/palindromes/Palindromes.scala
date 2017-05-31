@@ -6,6 +6,9 @@ object Palindromes {
     if(args.length != 1) {
       println("Wrong number of arguments: 1 expected")
     }
+    else if (args(0) == null || args(0).isEmpty) {
+      println("Provided string to search empty")
+    }
     else {
       getPalindromes(args(0)).foreach { p =>
         println(s"Text: ${p.value}, Index: ${p.start}, Length: ${p.length}")}
