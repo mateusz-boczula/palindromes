@@ -16,19 +16,19 @@ class PalindromesTest extends FlatSpec with Matchers {
   }
 
   it should "should find a single palindrome" in {
-    val palindromes = Palindromes.getPalindromes("abcdcba")
+    val palindromes = Palindromes.findPalindromes("abcdcba")
     palindromes should be (Seq(Palindrome(0, "abcdcba")))
   }
 
   it should "find all palindromes in the sample string" in {
-    val palindromes = Palindromes.getPalindromes("sqrrqabccbatudefggfedvwhijkllkjihxymnnmzpop")
+    val palindromes = Palindromes.findPalindromes("sqrrqabccbatudefggfedvwhijkllkjihxymnnmzpop")
     palindromes should be (Seq(
       Palindrome(23, "hijkllkjih"), Palindrome(13, "defggfed"), Palindrome(5, "abccba")))
   }
 
   it should "sort palindromes by length descending before returning results" in {
     val input = generatePalindromeInput((0 to 100).toList)
-    val palindromeLengths = Palindromes.getPalindromes(input).map(_.length).toList
+    val palindromeLengths = Palindromes.findPalindromes(input).map(_.length).toList
     palindromeLengths should be (List(100, 99, 98))
   }
 

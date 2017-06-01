@@ -10,19 +10,19 @@ object Palindromes {
       println("Provided string to search empty")
     }
     else {
-      getPalindromes(args(0)).foreach { p =>
+      findPalindromes(args(0)).foreach { p =>
         println(s"Text: ${p.value}, Index: ${p.start}, Length: ${p.length}")}
     }
   }
 
-  def getPalindromes(input: String) : Seq[Palindrome] = {
-    val oddLengthPalindromes = getOddLengthPalindromes(input)
-    val evenLengthPalindromes = getEvenLengthPalindromes(input)
+  def findPalindromes(input: String) : Seq[Palindrome] = {
+    val oddLengthPalindromes = findOddLengthPalindromes(input)
+    val evenLengthPalindromes = findEvenLengthPalindromes(input)
 
     (evenLengthPalindromes ++ oddLengthPalindromes).sortBy(_.length * -1).take(3)
   }
 
-  private def getEvenLengthPalindromes(input: String) = {
+  private def findEvenLengthPalindromes(input: String) = {
     input.zip(input.substring(1))
       .zipWithIndex
       .filter(p => p._1._1 == p._1._2)
@@ -36,7 +36,7 @@ object Palindromes {
       })
   }
 
-  private def getOddLengthPalindromes(input: String) = {
+  private def findOddLengthPalindromes(input: String) = {
     input.zip(input.substring(2))
       .zipWithIndex
       .filter(p => p._1._1 == p._1._2)
