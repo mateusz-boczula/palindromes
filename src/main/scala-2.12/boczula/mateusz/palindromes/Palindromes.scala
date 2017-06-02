@@ -3,7 +3,7 @@ package boczula.mateusz.palindromes
 object Palindromes {
 
   def main(args: Array[String]): Unit = {
-    if(args.length != 1) {
+    if(args == null || args.length != 1) {
       println("Wrong number of arguments: 1 expected")
     }
     else if (args(0) == null || args(0).isEmpty) {

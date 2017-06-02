@@ -7,12 +7,32 @@ import scala.util.Random
 
 class PalindromesTest extends FlatSpec with Matchers {
 
+  it should "handle null input gracefully" in {
+    Palindromes.main(null)
+  }
+
+  it should "handle empty input array gracefully" in {
+    Palindromes.main(Array())
+  }
+
+  it should "handle too long argument array case" in {
+    Palindromes.main(Array("abc", "bcd", "cde"))
+  }
+
+  it should "handle empty input string" in {
+    Palindromes.main(Array(""))
+  }
+
   it should "find a palindrome when inputs satisfies the property" in {
     Palindromes.getPalindrome(Option("d"), "abc", "cba") should be ("abcdcba")
   }
 
   it should "find a palindrome when only the partial of the string is" in {
     Palindromes.getPalindrome(Option("d"), "abc", "cbe") should be ("bcdcb")
+  }
+
+  it should "return an empty list in case of no palindromes present" in {
+    Palindromes.findPalindromes("zxdsc") should be (Nil)
   }
 
   it should "should find a single palindrome" in {
